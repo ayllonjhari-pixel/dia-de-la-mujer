@@ -6,7 +6,7 @@
 
 <style>
 
-/* INTRO FUTURISTA */
+/* ---------- INTRO FUTURISTA ---------- */
 
 #intro{
 position:fixed;
@@ -14,10 +14,11 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:#050510;
-color:#00ffee;
+background:#04040f;
+color:#00ffe1;
 font-family:monospace;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
 z-index:9999;
@@ -26,17 +27,18 @@ overflow:hidden;
 
 .terminal{
 font-size:22px;
+text-align:left;
 }
 
 .terminal p{
-margin:10px;
+margin:10px 0;
 }
 
 .particula{
 position:absolute;
 width:2px;
 height:2px;
-background:#00ffee;
+background:#00ffe1;
 opacity:0.6;
 animation:subirParticula 8s linear infinite;
 }
@@ -46,13 +48,30 @@ from{transform:translateY(0)}
 to{transform:translateY(-100vh)}
 }
 
-/* PROGRAMA PRINCIPAL */
+#btnEntrar{
+display:none;
+margin-top:30px;
+padding:12px 30px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+box-shadow:0 0 15px #ff4d6d;
+}
+
+/* ---------- PROGRAMA ---------- */
 
 body{
 background:linear-gradient(135deg,#ff9a9e,#fad0c4);
 font-family:Arial;
 text-align:center;
 overflow:hidden;
+}
+
+#pagina{
+display:none;
 }
 
 h1{
@@ -79,10 +98,6 @@ cursor:pointer;
 margin:10px;
 }
 
-button:hover{
-background:#ff1e4d;
-}
-
 #carta{
 opacity:0;
 margin-top:30px;
@@ -100,7 +115,7 @@ font-size:26px;
 color:white;
 }
 
-/* ESTRELLAS */
+/* estrellas */
 
 .estrella{
 position:absolute;
@@ -114,7 +129,7 @@ animation:brillo 2s infinite;
 100%{opacity:0.3}
 }
 
-/* ROSAS */
+/* rosas */
 
 .rosa{
 position:absolute;
@@ -130,7 +145,7 @@ opacity:0;
 }
 }
 
-/* CORAZONES */
+/* corazones */
 
 .flotante{
 position:absolute;
@@ -143,7 +158,7 @@ animation:subir 6s linear forwards;
 100%{transform:translateY(-800px);opacity:0}
 }
 
-/* ESCENA FINAL */
+/* escena final */
 
 #final{
 display:none;
@@ -161,7 +176,6 @@ padding:20px;
 border-radius:20px;
 font-size:18px;
 color:#444;
-box-shadow:0 5px 10px rgba(0,0,0,0.2);
 }
 
 #inspiracion{
@@ -171,7 +185,6 @@ padding:20px;
 border-radius:20px;
 font-size:18px;
 color:#444;
-box-shadow:0 5px 10px rgba(0,0,0,0.2);
 }
 
 #ositos img{
@@ -184,21 +197,25 @@ border-radius:20px;
 
 <body>
 
-<!-- INTRO FUTURISTA -->
+<!-- INTRO -->
 
 <div id="intro">
 
 <div class="terminal">
-<p id="linea1"></p>
-<p id="linea2"></p>
-<p id="linea3"></p>
-<p id="linea4"></p>
-<p id="linea5"></p>
+<p id="l1"></p>
+<p id="l2"></p>
+<p id="l3"></p>
+<p id="l4"></p>
+<p id="l5"></p>
 </div>
+
+<button id="btnEntrar" onclick="entrarSistema()">Entrar</button>
 
 </div>
 
-<!-- PROGRAMA -->
+<!-- PAGINA -->
+
+<div id="pagina">
 
 <h1>Nataly ❤️</h1>
 
@@ -206,7 +223,6 @@ border-radius:20px;
 <button onclick="chocolate()">🍫 Abrir chocolate</button>
 
 <div id="carta"></div>
-
 <div id="sorpresa"></div>
 
 <div id="final">
@@ -236,19 +252,34 @@ también tiene la suya.<br><br>
 
 Y esa inspiración eres tú.<br><br>
 
-✨ <b>Att: Jhari</b>
+<b>Att: Jhari</b>
 
 </div>
 
 </div>
 
-<audio id="musica" loop>
-<source src="cancion.mp3" type="audio/mpeg">
-</audio>
+</div>
+
+<audio id="musica" src="cancion.mp3" loop></audio>
 
 <script>
 
-/* INTRO TEXTO */
+/* PARTICULAS INTRO */
+
+for(let i=0;i<60;i++){
+
+let p=document.createElement("div")
+
+p.className="particula"
+
+p.style.left=Math.random()*window.innerWidth+"px"
+p.style.top=Math.random()*window.innerHeight+"px"
+
+document.body.appendChild(p)
+
+}
+
+/* TEXTO INTRO */
 
 function escribir(id,texto,velocidad){
 
@@ -271,35 +302,30 @@ clearInterval(intervalo)
 
 }
 
-setTimeout(()=>{escribir("linea1","Iniciando sistema...",60)},1000)
-setTimeout(()=>{escribir("linea2","Escaneando entorno...",60)},3000)
-setTimeout(()=>{escribir("linea3","Usuario detectado...",60)},5000)
-setTimeout(()=>{escribir("linea4","Identidad confirmada: Nataly ❤️",60)},7000)
-setTimeout(()=>{escribir("linea5","Iniciando proyecto Nataly...",60)},9000)
+setTimeout(()=>{escribir("l1","Iniciando sistema...",60)},1000)
+setTimeout(()=>{escribir("l2","Escaneando entorno...",60)},3000)
+setTimeout(()=>{escribir("l3","Usuario detectado...",60)},5000)
+setTimeout(()=>{escribir("l4","Identidad confirmada: Nataly ❤️",60)},7000)
+setTimeout(()=>{escribir("l5","Iniciando proyecto Nataly...",60)},9000)
 
-/* TERMINA INTRO Y EMPIEZA MUSICA */
+/* MOSTRAR BOTON */
 
 setTimeout(()=>{
 
-document.getElementById("intro").style.display="none"
+document.getElementById("btnEntrar").style.display="block"
+
+},11000)
+
+/* ENTRAR */
+
+function entrarSistema(){
 
 let musica=document.getElementById("musica")
 musica.volume=0.6
 musica.play()
 
-},13000)
-
-/* PARTICULAS INTRO */
-
-for(let i=0;i<60;i++){
-
-let p=document.createElement("div")
-p.className="particula"
-
-p.style.left=Math.random()*window.innerWidth+"px"
-p.style.top=Math.random()*window.innerHeight+"px"
-
-document.body.appendChild(p)
+document.getElementById("intro").style.display="none"
+document.getElementById("pagina").style.display="block"
 
 }
 
@@ -342,7 +368,7 @@ escribirCarta()
 
 }
 
-/* BOTON CHOCOLATE */
+/* CHOCOLATE */
 
 function chocolate(){
 
@@ -373,7 +399,7 @@ setTimeout(crearFlotante,i*80)
 
 }
 
-/* GIFS ALTERNANDO */
+/* GIFS */
 
 let gifs=["ositos.gif","cachetitos.gif"]
 let indiceGif=0
@@ -403,7 +429,7 @@ let e=document.createElement("div")
 e.className="flotante"
 e.innerHTML=elementos[Math.floor(Math.random()*elementos.length)]
 
-e.style.left=Math.random()*window.innerWidth+"px"
+e.style.left=Math.random()*window.innerWidth+"px
 e.style.top=window.innerHeight+"px"
 
 document.body.appendChild(e)
